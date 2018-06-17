@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using NETShop.Models.Repositories;
+using NETShop.Models.Repositories.Interfaces;
 
 namespace NETShop
 {
@@ -15,6 +17,10 @@ namespace NETShop
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Repositories:
+            services.AddTransient<IProductRepository, ProductRepositoryFake>(); // Create object each time interface is needed.
+
+            // Frameworks:
             services.AddMvc(); // Set up shared objects for MVC.
         }
 
@@ -29,6 +35,7 @@ namespace NETShop
             app.UseStatusCodePages(); // Add HTML to HTTP responses normally without body (e.g. 404 - Not Found).
             app.UseStaticFiles(); // Enable support for serving files from wwwroot folder.
 
+            // Routing:
             app.UseMvc(routes =>
             {
 
