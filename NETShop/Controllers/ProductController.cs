@@ -12,6 +12,6 @@ namespace NETShop.Controllers
             this.repository = repository;
         }
 
-        public ViewResult List => View(repository.Products);
+        public ViewResult List() => View(repository.Products);
     }
 }
